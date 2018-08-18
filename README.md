@@ -15,9 +15,8 @@ npm run dev
 npm run build
 ```
 
-# Terminal set-up
+## Terminal set-up
 
-### In correct filepath
 ### Install vue-resource
 ```
 npm install vue-resource --save
