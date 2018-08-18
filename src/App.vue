@@ -12,13 +12,11 @@
 
 <script>
      import Header from './components/Header.vue'
-     import Ninjas from './components/Ninjas.vue'
      import formHelper from './components/formHelper.vue'
      import addBlog from'./components/addBlog.vue'
      import showBlogs from'./components/showBlogs.vue'
      import listBlogs from'./components/listBlogs.vue'
      import Footer from './components/Footer.vue'
-     import htmlEditor from './components/htmlEditor.vue'
      import addWorkout from './components/addWorkout.vue'
      import workoutFormTemplate from './components/workoutFormTemplate.vue'
 
@@ -26,12 +24,10 @@
           components:{
                'app-header':Header,
                'app-footer':Footer,
-               'app-ninjas':Ninjas,
                'form-helper':formHelper,
                'add-blog':addBlog,
                'show-blogs':showBlogs,
                'list-blogs':listBlogs,
-               'html-editor':htmlEditor,
                'add-workout':addWorkout,
                'workout-template':workoutFormTemplate
           },

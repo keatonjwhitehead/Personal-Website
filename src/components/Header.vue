@@ -3,8 +3,6 @@
           <ul>
                <li><router-link to="/" exact>Blog</router-link></li>
                <li><router-link to="/add" exact>Add a new Blog</router-link></li>
-               <li><router-link to="/ninjas" exact>Ninja Profiles</router-link></li>
-               <li><router-link to="/htmlEditor" exact>Html Editor</router-link></li>
                <li><router-link to="/addWorkout" exact>Add Workout</router-link></li>
           </ul>
      </nav>
