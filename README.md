@@ -15,4 +15,4 @@ npm run dev
 npm run build
 ```
 
-This is the developement side of my website so please don't judge! :P
+This is the master side of my website so please let me know if anything is buggy or make an issue :)
