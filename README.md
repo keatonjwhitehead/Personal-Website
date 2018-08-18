@@ -19,18 +19,18 @@ npm run build
 
 ### In correct filepath
 ### Install vue-resource
-'''
+```
 npm install vue-resource --save
-'''
+```
 
 ### Install vue-router
-'''
+```
 npm install vue-router --save
-'''
+```
 
 ### Install firebase tools
-'''
+```
 npm install -g firebase-tools
-'''
+```
 
 This is the developement side of my website so please don't judge! :P
