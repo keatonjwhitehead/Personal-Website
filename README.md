@@ -16,19 +16,16 @@ npm run build
 ```
 
 ## Terminal set-up
-
-### Install vue-resource
 ```
+# Install vue-resource
 npm install vue-resource --save
-```
 
-### Install vue-router
-```
+
+# Install vue-router
 npm install vue-router --save
-```
 
-### Install firebase tools
-```
+
+# Install firebase tools
 npm install -g firebase-tools
 ```
 
