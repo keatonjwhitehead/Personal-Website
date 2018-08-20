@@ -1,68 +1,81 @@
 <template>
 <div>
      <div id="add-workout">
-          <h1>Workout editor</h1>
           <div slot="form-header">
-               <h3>Add a New Workout Post</h3>
+               <h1>Add a workout</h1>
           </div>
-          <form v-if="!submitted">
-               <label>Workout Title: </label>
-               <input type="text" placeholder="Title" v-model.lazy="workout.workoutTitle" required />
-               <label>Workout Content: </label>
-               <textarea v-model.lazy="workout.content"></textarea>
-               <div id="checkboxes">
-                    <label>Ninjas</label>
-                    <input type="checkbox" value="ninjas" v-model="workout.categories" />
-                    <label>Wizards</label>
-                    <input type="checkbox" value="wizards" v-model="workout.categories" />
-                    <label>Mario</label>
-                    <input type="checkbox" value="mario" v-model="workout.categories" />
-                    <label>Pizza</label>
-                    <input type="checkbox" value="pizza" v-model="workout.categories" />
-               </div>
-               <div id="date">
-                    <label>Date of Exercise</label>
-                    <input type="datetime-local" name="bdaytime">
-               </div>
-               <label>Author:</label>
-               <select v-model="workout.author">
-                              <option v-for="author in authors">{{ author }}</option>
-                         </select>
-               <button v-on:click.prevent="post">Add Workout</button>
-          </form>
-          <div v-if="submitted">
-               <h3> Your workout has been submitted! </h3>
-          </div>
+          <form-generator :schema="schema" v-model="formData">
+          </form-generator>
+
           <div id="preview">
-               <h3>Preview Workout</h3>
-               <p>Workout title: {{ workout.workoutTitle }}</p>
-               <p>Workout content:</p>
-               <p>{{ workout.content }}</p>
-               <p>Workout categories:</p>
-               <ul>
-                    <li v-for="category in workout.categories">{{ category }}</li>
-               </ul>
-               <p>Author: {{ workout.author }}</p>
+               <tr>
+                    <td>{{ formData.title }}</td>
+               </tr>
+               <tr>
+                    <td><u>Workout</u></td>
+                    <td><u>Sets</u></td>
+                    <td><u>Reps</u></td>
+                    <td><u>Weight</u></td>
+               </tr>
+               <tr>
+                    <td>{{ formData.exercise }}</td>
+                    <td>{{ formData.sets }}</td>
+                    <td>{{ formData.reps }}</td>
+                    <td>{{ formData.weight }}</td>
+               </tr>
           </div>
      </div>
 </div>
 </template>
 
 <script>
-console.log("Made it to the file");
+import formGenerator from "./form/formGenerator";
+
 export default {
+     name: "GeneratorDemo",
+     components: {
+          'form-generator': formGenerator
+     },
      data() {
           return {
-               workout: {
-                    workoutTitle: "",
-                    content: "",
-                    categories: [],
-                    author: ""
+               formData: {
+                    title: "Chest Day"
                },
-               authors: ['Keaton', 'James', 'HackCU', 'King James'],
-               submitted: false,
-
-
+               schema: [{
+                         fieldType: "selectList",
+                         name: "title",
+                         multi: false,
+                         label: "Title",
+                         options: ["", "Mr", "Ms", "Mx", "Dr", "Madam", "Lord"]
+                    },
+                    {
+                         fieldType: "textInput",
+                         placeholder: "Chest Press",
+                         label: "Exercise",
+                         name: "exercise"
+                    },
+                    {
+                         fieldType: "numberInput",
+                         placeholder: "3",
+                         name: "sets",
+                         label: "Sets",
+                         minValue: 1
+                    },
+                    {
+                         fieldType: "numberInput",
+                         placeholder: "3",
+                         name: "reps",
+                         label: "Reps",
+                         minValue: 1
+                    },
+                    {
+                         fieldType: "numberInput",
+                         placeholder: "3",
+                         name: "weight",
+                         label: "Weight",
+                         minValue: 1
+                    }
+               ]
           }
      },
      methods: {
@@ -70,7 +83,7 @@ export default {
                this.$http.post('https://workout-journal-5e5ea.firebaseio.com/posts.json', this.workout)
                     .then(function(data) {
                          console.log(data);
-                         this.submitted = true;
+
                     });
           }
      }
@@ -107,6 +120,10 @@ textarea {
 
 h3 {
      margin-top: 10px;
+}
+
+td {
+     padding: 5px;
 }
 
 #checkbox input {
