@@ -6,15 +6,16 @@
 </template>
 
 <script>
-import numberInput from "./numberInput.vue";
 import selectList from "./selectList.vue";
-import textInput from "./textInput.vue";
+import arrayInput from "./arrayInput.vue";
+import dynamicInput from "./dynamicInput.vue";
+
 export default {
      name: "formGenerator",
      components: {
-          numberInput,
           selectList,
-          textInput
+          arrayInput,
+          dynamicInput
      },
      props: ["schema", "value"],
      data() {

@@ -4,10 +4,30 @@
           <div slot="form-header">
                <h1>Add a workout</h1>
           </div>
-          <form-generator :schema="schema" v-model="formData">
-          </form-generator>
+          <form v-if="!submitted">
+               <form-generator :schema="schema" v-model="formData">
+               </form-generator>
+               <input v-for="" type="number" class="arrayInput" value="r1"></input>
 
-          <div id="preview">
+               <label>Reps</label>
+               <input type="number" class="arrayInput" value="r1" v-model="workout.reps[0]"></input>
+               <input type="number" class="arrayInput" value="r2" v-model="workout.reps[1]"></input>
+               <input type="number" class="arrayInput" value="r3" v-model="workout.reps[2]"></input>
+               <input type="number" class="arrayInput" value="r4" v-model="workout.reps[3]"></input>
+               <input type="number" class="arrayInput" value="r5" v-model="workout.reps[4]"></input>
+
+               <label>Weights</label>
+               <input type="number" class="arrayInput" value="w1" v-model="workout.weights[0]"></input>
+               <input type="number" class="arrayInput" value="w2" v-model="workout.weights[1]"></input>
+               <input type="number" class="arrayInput" value="w3" v-model="workout.weights[2]"></input>
+               <input type="number" class="arrayInput" value="w4" v-model="workout.weights[3]"></input>
+               <input type="number" class="arrayInput" value="w5" v-model="workout.weights[4]"></input>
+               <button v-on:click.prevent="post">Add workout</button>
+          </form>
+          <div v-if="submitted">
+               <h3> Your workout has been added! </h3>
+          </div>
+          <div id="preview ">
                <tr>
                     <td>{{ formData.title }}</td>
                </tr>
@@ -32,6 +52,7 @@
 import formGenerator from "./form/formGenerator";
 
 export default {
+
      name: "GeneratorDemo",
      components: {
           'form-generator': formGenerator
@@ -41,39 +62,26 @@ export default {
                formData: {
                     title: "Chest Day"
                },
+               workout: {
+                    exercise: '',
+                    sets: '',
+                    reps: ['0', '0', '0', '0', '0'],
+                    weight: ['0', '0', '0', '0', '0']
+               },
+               submitted: false,
                schema: [{
-                         fieldType: "selectList",
-                         name: "title",
-                         multi: false,
-                         label: "Title",
-                         options: ["", "Mr", "Ms", "Mx", "Dr", "Madam", "Lord"]
-                    },
-                    {
-                         fieldType: "textInput",
+                         type: "text",
+                         fieldType: "dynamicInput",
                          placeholder: "Chest Press",
                          label: "Exercise",
                          name: "exercise"
                     },
                     {
-                         fieldType: "numberInput",
-                         placeholder: "3",
+                         fieldType: "selectList",
                          name: "sets",
+                         multi: false,
                          label: "Sets",
-                         minValue: 1
-                    },
-                    {
-                         fieldType: "numberInput",
-                         placeholder: "3",
-                         name: "reps",
-                         label: "Reps",
-                         minValue: 1
-                    },
-                    {
-                         fieldType: "numberInput",
-                         placeholder: "3",
-                         name: "weight",
-                         label: "Weight",
-                         minValue: 1
+                         options: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
                     }
                ]
           }
@@ -83,6 +91,7 @@ export default {
                this.$http.post('https://workout-journal-5e5ea.firebaseio.com/posts.json', this.workout)
                     .then(function(data) {
                          console.log(data);
+                         submitted = true;
 
                     });
           }
@@ -110,6 +119,10 @@ textarea {
      display: block;
      width: 100%;
      padding: 8px;
+}
+
+.arrayInput {
+     width: 30px;
 }
 
 #preview {
